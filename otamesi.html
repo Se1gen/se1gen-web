@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>うんだめし</title>
+</head>
+
+<body style="text-align: center; padding-top: 50px;">
+
+    <h1>うんだめし</h1>
+
+    <p>click button!</p>
+
+    <button onclick="showMessage()">
+        CLICK
+    </button>
+
+    <p id="message"></p>
+
+    <script>
+        function showMessage() {
+
+            const messages = [
+                "大吉！！🎉今日はいいことがあるでしょう　多分",
+                "中吉！✨まあまあいいことあるかも",
+                "吉！可もなく不可もなく、だね",
+                "大凶！今日は最悪な1日になるかも　残念！"
+
+            ];
+
+            const randomNumber = Math.floor(Math.random() * messages.length);
+
+            document.getElementById("message").textContent = messages[randomNumber];
+
+            document.getElementById("message").style.color = "black";
+            document.body.style.backgroundColor = "white";
+
+            if (messages[randomNumber] === "大吉！！🎉今日はいいことがあるでしょう　多分") {
+                document.getElementById("message").style.color = "red";
+                document.body.style.backgroundColor = "pink";
+            } else if (messages[randomNumber] === "大凶！今日は最悪な1日になるかも　残念！") {
+                document.getElementById("message").style.color = "blue";
+                document.body.style.backgroundColor = "lightblue";
+            }
+        }
+    </script>
+
+</body>
+</html>

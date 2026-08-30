@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>じゃんけん</title>
+</head>
+
+<body style="text-align: center; padding-top: 50px;">
+
+    <h1>じゃんけん</h1>
+
+    <button style="font-size: 40px; padding: 20px 30px; margin: 10px;"
+    onclick="play('rock')">
+        ✊
+    </button>
+    <button style="font-size: 40px; padding: 20px 30px; margin: 10px;"
+    onclick="play('scissors')">
+        ✌️
+    </button>
+    <button style="font-size: 40px; padding: 20px 30px; margin: 10px;"
+    onclick="play('paper')">
+        ✋
+    </button>
+
+    <p id="playerChoice"></p>
+    <p id="cpuChoice"></p>
+    <p id="result"></p>
+    <p id="score">
+        勝ち：０ / 負け：０ / あいこ：０
+    </p>
+    <p id="streak">
+        連勝：０
+    </p>
+    <button onclick="resetGame()">リセット</button>
+
+    <script>
+        let winCount = 0;
+        let loseCount = 0;
+        let drawCount = 0;
+        let streakCount = 0;
+
+        function play(choice) {
+
+            let playerEmoji;
+
+            if (choice === "rock") {
+                playerEmoji = "✊";
+            } else if (choice === "scissors") {
+                playerEmoji = "✌️";
+            } else if (choice === "paper") {
+                playerEmoji = "✋";
+            }
+
+            document.getElementById("playerChoice").textContent = "あなた：" + playerEmoji;
+
+            const choices = [
+                "rock",
+                "scissors",
+                "paper"
+            ];
+
+            const randomNumber = Math.floor(Math.random() * choices.length);
+
+            let cpuEmoji;
+
+            if (choices[randomNumber] === "rock") {
+                cpuEmoji = "✊";
+            } else if (choices[randomNumber] === "scissors") {
+                cpuEmoji = "✌️";
+            } else if (choices[randomNumber] === "paper") {
+                cpuEmoji = "✋";
+            }
+
+            document.getElementById("cpuChoice").textContent = "CPU：" + cpuEmoji;
+
+            if (choice === choices[randomNumber]) {
+                document.getElementById("result").textContent = "Draw!";
+                drawCount++;
+            } else if (
+                (choice === "rock" && choices[randomNumber] === "scissors") ||
+                (choice === "scissors" && choices[randomNumber] === "paper") ||
+                (choice === "paper" && choices[randomNumber] === "rock")
+            ) {
+                document.getElementById("result").textContent = "You Win! やるやん。明日俺に、リベンジさせて。";
+                winCount++;
+                streakCount++;
+            } else {
+                document.getElementById("result").textContent = "You Lose! 何で負けたか、明日まで考えといてください。";
+                loseCount++;
+                streakCount = 0;
+            }
+            document.getElementById("score").textContent =
+             "勝ち：" + winCount + 
+             " / 負け：" + loseCount + 
+             " / あいこ：" + drawCount;
+            document.getElementById("streak").textContent = "連勝：" + streakCount;
+        }
+
+        function resetGame() {
+            winCount = 0;
+            loseCount = 0;
+            drawCount = 0;
+            streakCount = 0;
+
+            document.getElementById("score").textContent = 
+            "勝ち：０ / 負け：０ / あいこ：０";
+            document.getElementById("streak").textContent = "連勝：０";
+
+            document.getElementById("playerChoice").textContent = "";
+            document.getElementById("cpuChoice").textContent = "";
+            document.getElementById("result").textContent = "";
+        }
+
+    </script>
+
+    <a href="index.html">
+        トップに戻る
+    </a>
+
+</body>
+</html>
